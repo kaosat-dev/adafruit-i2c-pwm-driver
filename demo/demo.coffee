@@ -1,7 +1,9 @@
-PmwServoDriver = require("../main")
+PwmDriver = require("../main")
 sleep = require('sleep')
 
-pwm = new PmwServoDriver(0x40, '/dev/i2c-1', true)
+pwm = new PwmDriver(0x40)
+#you can also specifiy device name / debug flag
+#pwm = new PwmDriver(0x40, '/dev/i2c-1', true)
 
 servoMin = 150  # Min pulse length out of 4096
 servoMax = 600  # Max pulse length out of 4096

@@ -26,15 +26,16 @@ class PWMDriver
 
   #__RESET  	       : 0x0H
 
-  constructor:(address,device, debug)->
+  constructor:(adress, device debug)->
     @address = address or 0x40
-    @device = device or 1
+    @device = device or '/dev/i2c-1'
     @debug = debug or false
     @i2c = new I2C(@address, device: @device)
       
     if (@debug)
       console.log "device #{device}, adress:#{address}, debug:#{debug}" 
       console.log "Reseting PCA9685" , "mode1:", @__MODE1
+    
     @_send(@__MODE1, 0x00)
 
     if (@debug)
@@ -70,25 +71,23 @@ class PWMDriver
   _step2:(err, res)=>
     if err?
       console.log "error", err
+      throw new Error(err)
 
-    console.log "result buffer", res
     oldmode = res[0]
-    console.log "oldmode", oldmode, "asHex", oldmode.toString(16)
-
     newmode = (oldmode & 0x7F) | 0x10             # sleep
     prescale = @prescale
-    console.log("prescale", Math.floor(prescale),"newMode", newmode.toString(16))
+    
+    if @debug
+      console.log("prescale", Math.floor(prescale),"newMode", newmode.toString(16))
 
     @_send(@__MODE1, newmode)        # go to sleep
     @_send(@__PRESCALE, Math.floor(prescale))
     @_send(@__MODE1, oldmode)
-    #sleep.usleep(5000)
     sleep.usleep(10000)
     @_send(@__MODE1, oldmode | 0x80)
     
   setPWMFreq:(freq)->
     #"Sets the PWM frequency"
-    console.log "Debug", @debug
     prescaleval = 25000000.0    # 25MHz
     prescaleval /= 4096.0       # 12-bit
     prescaleval /= freq
