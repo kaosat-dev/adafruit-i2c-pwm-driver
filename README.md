@@ -13,19 +13,21 @@ PwmDriver = require('adafruit-i2c-pwm')
 pwm = new PwmDriver  0x40 '/dev/i2c-1'
 
 ```
+To configure I2c on your Raspberry-pi / Beaglebone please see : https://npmjs.org/package/i2c 
 
 
 API
 ====
 
-  - [PwmDriver(device:String,address:Number)](#lcdplatedevicestringaddressnumberpollintervalnumber)
+  - [PwmDriver(address:Number,device:String,debug:Bool)]
 
-## PwmDriver(device:String,address:Number)
+## PwmDriver(address:Number,device:String,debug:Bool)
 
 Setting up a new PwmDriver
 
-- device: Device name, e.g. '/dev/i2c-1'
 - address: Address of the i2c panel, e.g. 0x20
+- device: Device name, e.g. '/dev/i2c-1' (defaults to /dev/i2c-1)
+- debug: flag used to display debug messages
 
 #
 ## Licence

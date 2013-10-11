@@ -19,8 +19,6 @@ setServoPulse=(channel, pulse)->
   pwm.setPWM(channel, 0, pulse)
 
 pwm.setPWMFreq(60) # Set frequency to 60 Hz  
-#pwm.scan()    
-
 
 setHigh=()->
   pwm.setPWM(0, 0, servoMax)
@@ -32,10 +30,6 @@ setLow=()->
 
 servoLoop=()->
   setLow()
-  #pwm.setPWM(0, 0, servoMin)
-  #setTimeout( setHigh, 1000 )
-
-#setInterval servoLoop 2200
 
 servoLoop()
 
@@ -43,12 +37,15 @@ servoLoop()
 while true
   # Change speed of continuous servo on channel O
   pwm.setPWM(0, 0, servoMin)
+  sleep.sleep(1)
   pwm.setPWM(0, 0, servoMax)
   sleep.sleep(1)
 ###
-process.on( 'SIGINT', ()->
+
+
+process.on 'SIGINT', ()->
   console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" )
   # some other closing procedures go here
   pwm.stop()
   process.exit( )
-)
+
