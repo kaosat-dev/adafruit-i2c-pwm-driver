@@ -115,4 +115,8 @@ class PWMDriver
     @_send(@__LED0_OFF_L+4*channel, off_ & 0xFF)
     @_send(@__LED0_OFF_H+4*channel, off_ >> 8)
 
+  stop:->
+    @_send(@__ALLLED_OFF_H, 0x01)
+    #@_send(@__ALLLED_OFF_h, off_ >> 8)
+
 module.exports = PWMDriver

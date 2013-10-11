@@ -44,3 +44,9 @@ while true
   pwm.setPWM(0, 0, servoMax)
   sleep.sleep(1)
 ###
+process.on( 'SIGINT', ()->
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" )
+  # some other closing procedures go here
+  pwm.stop()
+  process.exit( )
+)

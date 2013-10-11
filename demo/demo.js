@@ -49,3 +49,9 @@ while true
   sleep.sleep(1)
 */
 
+
+process.on('SIGINT', function() {
+  console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+  pwm.stop();
+  return process.exit();
+});
