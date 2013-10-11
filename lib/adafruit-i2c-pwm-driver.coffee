@@ -26,7 +26,7 @@ class PWMDriver
 
   #__RESET  	       : 0x0H
 
-  constructor:(adress, device debug)->
+  constructor:(address, device, debug)->
     @address = address or 0x40
     @device = device or '/dev/i2c-1'
     @debug = debug or false
@@ -53,7 +53,8 @@ class PWMDriver
 
     if not (values instanceof Array)
       values = [values]
-    console.log "cmd #{cmd.toString(16)} values #{values}"
+    if @debug
+      console.log "cmd #{cmd.toString(16)} values #{values}"
     @i2c.writeBytes cmd, values, (err)=>
       if err?
         console.log "Error: in I2C", err
