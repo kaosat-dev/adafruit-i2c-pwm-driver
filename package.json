@@ -11,7 +11,7 @@
     "adafruit",
     "i2c",
     "pwm",
-    "servo",
+    "servo"
   ],
    "repository" :
   {
