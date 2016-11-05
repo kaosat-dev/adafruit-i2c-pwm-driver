@@ -9,7 +9,7 @@ http://www.adafruit.com/products/815
 
 ```js
 const makePwmDriver = require('adafruit-i2c-pwm')
-const pwmDriver = MakePwmDriver(0x40, '/dev/i2c-1')
+const pwmDriver = makePwmDriver(0x40, '/dev/i2c-1')
 
 pwmDriver.setPWMFreq(50)
 pwmDriver.setPWM(2) // channel, on , off
