@@ -101,7 +101,6 @@ function makePwmDriver(options) {
     }
 
     return i2c.readBytes(MODE1, 1).then(function (data) {
-      console.log('after readBytes');
       var oldmode = data[0];
       var newmode = oldmode & 0x7F | 0x10; // sleep
       if (debug) {
