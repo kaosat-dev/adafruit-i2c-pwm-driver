@@ -15,6 +15,7 @@ pwmDriver.setPWMFreq(50)
 pwmDriver.setPWM(2) // channel, on , off
 
 ```
+
 To configure I2c on your Raspberry-pi / Beaglebone please see : https://npmjs.org/package/i2c
 
 
@@ -32,7 +33,7 @@ Setting up a new PwmDriver
 - debug: flag used to display debug messages
 
 
-## Licence
+## License
 MIT
 
 Based on the [Adafruit's Raspberry-Pi Python Code Library](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git)
