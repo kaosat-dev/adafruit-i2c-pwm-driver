@@ -35,7 +35,7 @@ function makePwmDriver(options) {
   var defaults = {
     address: 0x40,
     device: '/dev/i2c-1',
-    debug: true
+    debug: false
   };
 
   var _Object$assign = Object.assign({}, defaults, options),

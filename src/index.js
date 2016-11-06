@@ -33,7 +33,7 @@ function makePwmDriver (options) {
   const defaults = {
     address: 0x40,
     device: '/dev/i2c-1',
-    debug: true
+    debug: false
   }
   const {address, device, debug} = Object.assign({}, defaults, options)
   const i2c = I2C(address, {device, debug})
