@@ -38,7 +38,7 @@ you can find a simple example [here](https://raw.githubusercontent.com/kaosat-de
 ## API
 
 
-  ### `makePwmDriver(address:Number,device:String,debug:Bool)`
+  `makePwmDriver(address:Number,device:String,debug:Bool)`
 
 Setting up a new PwmDriver
 
@@ -46,15 +46,15 @@ Setting up a new PwmDriver
 - device: Device name, e.g. '/dev/i2c-1' (defaults to /dev/i2c-1)
 - debug: flag used to display debug messages
 
-  ### `pwmDriver.setPWMFreq(frequency:Number)`
+  `pwmDriver.setPWMFreq(frequency:Number)`
 
 Set the PWM frequency to the provided value (in hertz).
 
-  ### `pwmDriver.setPWM(channel:Number, on:Number, off:Number)`
+  `pwmDriver.setPWM(channel:Number, on:Number, off:Number)`
 
 Sets a single PWM channel.
 
-  ### `pwmDriver.setALLPWM(channel:Number, on:Number, off:Number)`
+  `pwmDriver.setALLPWM(channel:Number, on:Number, off:Number)`
 
 Sets all PWM channels.
 
