@@ -20,8 +20,13 @@
   "bugs": {
     "url": "https://github.com/kaosat-dev/adafruit-i2c-pwm-driver/issues"
   },
+  "scripts": {
+    "build": "babel src --out-dir dist"
+  },
   "dependencies": {
     "i2c": "0.2.3",
-    "sleep": "~1.1.1"
+    "sleep": "4.0.0"
+  },
+  "devDependencies": {
   }
 }
