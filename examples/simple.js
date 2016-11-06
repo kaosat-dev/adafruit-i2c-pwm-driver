@@ -1,4 +1,4 @@
-const makePwmDriver = require('../src/index')
+const makePwmDriver = require('../dist/index')
 // const makePwmDriver = require('adafruit-i2c-pwm')
 const sleep = require('sleep').sleep
 

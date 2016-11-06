@@ -2,7 +2,7 @@
   "name": "adafruit-i2c-pwm-driver",
   "version": "0.1.0",
   "description": "node.js /i2c control for the Adafruit PWM servo driver",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "Mark Moissette",
   "license": "MIT",
   "keywords": [
@@ -21,12 +21,19 @@
     "url": "https://github.com/kaosat-dev/adafruit-i2c-pwm-driver/issues"
   },
   "scripts": {
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "release": "npm run release-patch",
+    "release-patch": "git checkout master && npm run build; git commit -a -m 'chore(dist): built release/'; npm version patch && git push origin master --tags ",
+    "release-minor": "git checkout master && npm run build; git commit -a -m 'chore(dist): built release/'; npm version minor && git push origin master --tags ",
+    "release-major": "git checkout master && npm run build; git commit -a -m 'chore(dist): built release/'; npm version major && git push origin master --tags "
   },
   "dependencies": {
     "i2c": "0.2.3",
     "sleep": "4.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0"
   }
 }
