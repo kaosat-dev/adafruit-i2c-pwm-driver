@@ -1,7 +1,7 @@
 Adafruit I2C PWM Driver
 ======================
 
-Node.js implementation for the Adafruit 16-Channel 12-bit PWM/Servo Driver 
+Node.js implementation for the Adafruit 16-Channel 12-bit PWM/Servo Driver
 http://www.adafruit.com/products/815
 
 
@@ -9,11 +9,23 @@ http://www.adafruit.com/products/815
 Usage
 -----
 ```coffeescript
-PwmDriver = require('adafruit-i2c-pwm')
-pwm = new PwmDriver  0x40 '/dev/i2c-1'
+var PwmDriver = require('adafruit-i2c-pwm-driver');
+var pwm = new PwmDriver(0x40, '/dev/i2c-1');
+var sleep = require('sleep');
 
+var servoMin = 150;
+var servoMax = 600;
+
+while(true) {
+  pwm.setPWM(4, 0, servoMin);
+  sleep.sleep(1);
+  pwm.setPWM(4, 0, servoMax);
+  sleep.sleep(1);
+  pwm.setPWM(4, 0, 0);
+  sleep.sleep(10);
+}
 ```
-To configure I2c on your Raspberry-pi / Beaglebone please see : https://npmjs.org/package/i2c 
+To configure I2c on your Raspberry-pi / Beaglebone please see : https://npmjs.org/package/i2c
 
 
 API
@@ -30,14 +42,14 @@ Setting up a new PwmDriver
 - debug: flag used to display debug messages
 
 #
-## Licence
+## License
 MIT
 
 Based on the [Adafruit's Raspberry-Pi Python Code Library](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git)
 
 >  Here is a growing collection of libraries and example python scripts
 >  for controlling a variety of Adafruit electronics with a Raspberry Pi
-  
+
 >  In progress!
 >
 >  Adafruit invests time and resources providing this open source code,
