@@ -1,6 +1,6 @@
 {
   "name": "adafruit-i2c-pwm-driver",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "node.js /i2c control for the Adafruit PWM servo driver",
   "main": "main.js",
   "author": "Mark Moissette",
@@ -23,7 +23,7 @@
   "dependencies": {
     "underscore": "1.2.4",
     "coffee-script": "1.3.3",
-    "i2c": "0.1.1",
-    "sleep": "~1.1.1"
+    "i2c": "0.2.3",
+    "sleep": "~3.0.1"
   }
 }
