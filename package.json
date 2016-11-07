@@ -29,8 +29,7 @@
   },
   "dependencies": {
     "i2c": "0.2.3",
-    "nanotimer": "^0.3.14",
-    "sleep": "4.0.0"
+    "nanotimer": "^0.3.14"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
