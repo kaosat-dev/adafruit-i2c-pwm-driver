@@ -1,5 +1,8 @@
 const I2C = require('i2c')
 
+/*
+  this wrappers wraps the i2c readBytes, writeBytes functions and returns promises
+*/
 function makeI2CWrapper (address, {device, debug}) {
   const i2c = new I2C(address, {device})
 

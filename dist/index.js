@@ -1,7 +1,9 @@
 'use strict';
 
+var _sleep = require('./sleep');
+
 var I2C = require('./i2cWrapper');
-var sleep = require('sleep');
+
 
 // ============================================================================
 // Adafruit PCA9685 16-Channel PWM Servo Driver
@@ -52,7 +54,7 @@ function makePwmDriver(options) {
       console.log('Reseting PCA9685, mode1: ' + MODE1);
     }
     // i2c.writeByte(0x06) // SWRST
-    //i2c.writeBytes(MODE1, 0x00)
+    // i2c.writeBytes(MODE1, 0x00)
     //
     /*await setAllPWM(0, 0)
     await i2c.writeBytes(MODE2, OUTDRV)
@@ -72,15 +74,16 @@ function makePwmDriver(options) {
     setAllPWM(0, 0);
     i2c.writeBytes(MODE2, OUTDRV);
     i2c.writeBytes(MODE1, ALLCALL);
-    sleep.usleep(5000);
-    i2c.readBytes(MODE1, 1).then(function (mode1) {
-      mode1 = mode1 & ~SLEEP; // wake up (reset sleep)
-      return i2c.writeBytes(MODE1, mode1);
-    }).then(sleep.usleep(5000)) // wait for oscillator)
-    .then(function (x) {
-      return debug ? console.log('init done ') : '';
-    }).catch(function (e) {
-      return console.error('error in init', e);
+    (0, _sleep.usleep)(5000).then(function (x) {
+      return i2c.readBytes(MODE1, 1).then(function (mode1) {
+        mode1 = mode1 & ~SLEEP; // wake up (reset sleep)
+        return i2c.writeBytes(MODE1, mode1);
+      }).then((0, _sleep.usleep)(5000)) // wait for oscillator)
+      .then(function (x) {
+        return debug ? console.log('init done ') : '';
+      }).catch(function (e) {
+        return console.error('error in init', e);
+      });
     });
   };
 
@@ -109,8 +112,9 @@ function makePwmDriver(options) {
       i2c.writeBytes(MODE1, newmode); // go to sleep
       i2c.writeBytes(PRESCALE, Math.floor(prescale));
       i2c.writeBytes(MODE1, oldmode);
-      sleep.usleep(5000);
-      i2c.writeBytes(MODE1, oldmode | 0x80);
+      (0, _sleep.usleep)(5000).then(function (x) {
+        return i2c.writeBytes(MODE1, oldmode | 0x80);
+      });
     });
   };
 
@@ -151,6 +155,5 @@ function makePwmDriver(options) {
     setPWM: setPWM,
     setAllPWM: setAllPWM,
     setPWMFreq: setPWMFreq,
-    stop: stop
-  };
+    stop: stop };
 }
