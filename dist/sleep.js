@@ -12,7 +12,7 @@ function sleep(seconds) {
     var timer = new NanoTimer();
     timer.setTimeout(function (x) {
       return resolve(seconds);
-    }, '', seconds + 'u');
+    }, '', seconds + 's');
     timer.clearInterval();
   });
 }
