@@ -2,6 +2,9 @@
 
 var I2C = require('i2c');
 
+/*
+  this wrappers wraps the i2c readBytes, writeBytes functions and returns promises
+*/
 function makeI2CWrapper(address, _ref) {
   var device = _ref.device,
       debug = _ref.debug;

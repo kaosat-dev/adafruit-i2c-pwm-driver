@@ -1,8 +1,8 @@
 const makePwmDriver = require('../dist/index')
-// const makePwmDriver = require('adafruit-i2c-pwm')
-const sleep = require('sleep').sleep
+// const makePwmDriver = require('adafruit-i2c-pwm')// use this one in real use case
+const sleep = require('../dist/sleep').sleep
 
-const pwm = makePwmDriver(0x40, '/dev/i2c-1')
+const pwm = makePwmDriver({address: 0x40, device: '/dev/i2c-1', debug: false})
 
 // Configure min and max servo pulse lengths
 const servo_min = 150 // Min pulse length out of 4096
@@ -10,15 +10,13 @@ const servo_max = 600 // Max pulse length out of 4096
 
 pwm.setPWMFreq(50)
 
-setTimeout(function () {
-  console.log('Moving servo on channel 0, press Ctrl-C to quit...')
-  while(true) {
-    // Move servo on channel O between extremes.
-    pwm.setPWM(0, 0, servo_min)
-    //pwm.setPWM(12, 0, servo_min)
-    sleep(1)
-    pwm.setPWM(0, 0, servo_max)
-    //pwm.setPWM(12, 0, servo_max)
-    sleep(1)
-  }
-}, 5000)
+const loop = function () {
+  return sleep(1)
+    .then(function () { return pwm.setPWM(0, 0, servo_min) })
+    .then(function () { return sleep(1) })
+    .then(function () { return pwm.setPWM(0, 0, servo_max) })
+    .then(loop)
+}
+
+sleep(5)
+  .then(loop)
