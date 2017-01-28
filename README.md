@@ -25,9 +25,10 @@ npm i adafruit-i2c-pwm-driver
 const makePwmDriver = require('adafruit-i2c-pwm')
 const pwmDriver = makePwmDriver({address: 0x40, device: '/dev/i2c-1'})
 
-pwmDriver.setPWMFreq(50)
-pwmDriver.setPWM(2) // channel, on , off
-
+pwmDriver.init()
+  .then(() => pwmDriver.setPWMFreq(50))
+  .then(() => pwmDriver.setPWM(2))// channel, on , off
+  .catch(console.error);
 ```
 
 To configure I2c on your Raspberry-pi / Beaglebone please see [here](https://npmjs.org/package/i2c)
@@ -46,17 +47,21 @@ Setting up a new PwmDriver
 - device: Device name, e.g. '/dev/i2c-1' (defaults to /dev/i2c-1)
 - debug: flag used to display debug messages
 
+`pwmDriver.init()`
+
+Initialize the PwmDriver. Only required once after `makePwmDriver`. Returns a Promise.
+
 `pwmDriver.setPWMFreq(frequency:Number)`
 
-Set the PWM frequency to the provided value (in hertz).
+Set the PWM frequency to the provided value (in hertz). Returns a Promise.
 
 `pwmDriver.setPWM(channel:Number, on:Number, off:Number)`
 
-Sets a single PWM channel.
+Sets a single PWM channel. Returns a Promise.
 
 `pwmDriver.setALLPWM(channel:Number, on:Number, off:Number)`
 
-Sets all PWM channels.
+Sets all PWM channels. Returns a Promise.
 
 
 ## Contribute
